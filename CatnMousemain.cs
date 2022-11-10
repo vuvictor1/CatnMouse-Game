@@ -5,9 +5,9 @@
 // Section: 223N-01
 //
 // Program Information:
-// Program Name: Double Pinball Rebound
-// This File: DoublePinballmain.cs
-// Description: Manager file that will call on UI file to display animations
+// Program Name: Mouse Chase
+// This File: CatnMousemain.cs
+// Description: Manager file that will call on UI file to display graphical output
 //******************************************************************************
 // Copyright (C) 2022 Victor V. Vu
 // This program is free software: you can redistribute it and/or modify it under
