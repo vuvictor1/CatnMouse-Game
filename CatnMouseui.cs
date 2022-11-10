@@ -5,9 +5,9 @@
 // Section: 223N-01
 //
 // Program Information:
-// Program Name: Double Pinball Rebound
-// This File: DoublePinballui.cs
-// Description: UI file containing animations for the double rebounding balls
+// Program Name: Mouse Chase
+// This File: CatnMouseui.cs
+// Description: UI file containing animations & controls for the Mouse game
 //******************************************************************************
 // Copyright (C) 2022 Victor V. Vu
 // This program is free software: you can redistribute it and/or modify it under
@@ -27,7 +27,7 @@ using System.Windows.Forms;
 using System.Timers;
 
 // Call functions in form library & delcare variables
-public class DoublePinballui : Form {
+public class CatnMouseui : Form {
   private Label author = new Label();
   private Label speed_label1 = new Label();
   private Label speed_label2 = new Label();
@@ -80,7 +80,7 @@ public class DoublePinballui : Form {
   private Random number_creator2 = new Random();
 
   // Initialize Variables
-  public DoublePinballui() {
+  public CatnMouseui() {
     // Assign size to the ui
     MaximumSize = max_exit_ui_size;
     MinimumSize = min_exit_ui_size;
