@@ -27,11 +27,11 @@ using System;
 using System.Windows.Forms;
 
 // Main class to call ui function
-public class DoublePinball {
+public class CatnMouse {
   static void Main(string[] args) {
-    System.Console.WriteLine("Welcome to the driver file of the Double Pinball Rebound program.");
-    DoublePinballui DoublePinballapp = new DoublePinballui();
-    Application.Run(DoublePinballapp);
-    System.Console.WriteLine("Double Pinball Rebound program will now terminate.");
+    System.Console.WriteLine("Welcome to the driver file of the Mouse Chase game.");
+    CatnMouseui CatnMouseapp = new CatnMouseui();
+    Application.Run(CatnMouseapp);
+    System.Console.WriteLine("The Mouse Chase game will now terminate.");
   }
 }
