@@ -44,13 +44,14 @@ public class CatnMouseui : Form {
   private Panel control_panel = new Panel();
   private Size max_exit_ui_size = new Size(1024, 900);
   private Size min_exit_ui_size = new Size(1024, 900);
-  // set up constants and static variables
+  // Set up constants and static variables
   private const double refresh_rate = 60.00; // speed in Hz
   private const double motion_clock_rate = 42.60; // speed in tics/seconds
   private static double speed1; // input speed in pixel/seconds
   private static double speed2;
-  private static double direction1; // used to generate directions
+  private static double direction1; // used to hold directions
   private static double direction2;
+  // Statics to update ball locations
   private static double X;
   private static double Y;
   private static double X2;
@@ -65,21 +66,20 @@ public class CatnMouseui : Form {
   private static double Δy2;
   private static double ball_speed_pixel_per_tic1;
   private static double ball_speed_pixel_per_tic2;
-  private static bool button_pressed = false; // control if statement
-  private static bool normal_color = true; // control ball color
-  private static bool in_collision = false; // control collision check
-  private static double ball_collision; // hold the distance between ball centers
-  // Declare ball timer and interval
-  private double ball_clock_interval = 1000.00/motion_clock_rate;
-  private static System.Timers.Timer ball_clock = new System.Timers.Timer();
-  // Declare the refresh clock.
+  private static double ball_collision; // distance between ball centers
+  // Control start buttona and collision check
+  private static bool button_pressed = false;
+  private static bool in_collision = false;
+  // Declare refresh and ball clock intervals
   private double refresh_clock_interval = 1000.00/refresh_rate;
   private static System.Timers.Timer ui_refresh_clock = new System.Timers.Timer();
-  // Hold random numbers for degree
+  private double ball_clock_interval = 1000.00/motion_clock_rate;
+  private static System.Timers.Timer ball_clock = new System.Timers.Timer();
+  // Generate random numbers in degrees
   private Random number_creator1 = new Random();
   private Random number_creator2 = new Random();
 
-  // Initialize Variables
+  // Initialize variables
   public CatnMouseui() {
     // Assign size to the ui
     MaximumSize = max_exit_ui_size;
@@ -108,7 +108,7 @@ public class CatnMouseui : Form {
     header_panel.Size = new Size(1024, 50);
     display_panel.Size = new Size(1024, 625);
     control_panel.Size = new Size(1024, 200);
-    // Set colors for panel and buttons
+    // Set color for panel and buttons
     header_panel.BackColor = Color.Cornsilk;
     display_panel.BackColor = Color.BurlyWood;
     control_panel.BackColor = Color.CornflowerBlue;
@@ -128,7 +128,7 @@ public class CatnMouseui : Form {
     red_coord.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     white_coord.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     quit_button.Font = new Font("Times New Roman", 15, FontStyle.Regular);
-    // Set text alignment and property
+    // Set text alignment and read only status
     author.TextAlign = ContentAlignment.MiddleCenter;
     speed_input1.TextAlign = HorizontalAlignment.Center;
     speed_input2.TextAlign = HorizontalAlignment.Center;
@@ -166,28 +166,28 @@ public class CatnMouseui : Form {
     control_panel.Controls.Add(red_coord);
     control_panel.Controls.Add(white_coord);
     control_panel.Controls.Add(quit_button);
-    // Control buttons when clicked
+    // Control buttons when are clicked
     start_button.Click += new EventHandler(start);
     quit_button.Click += new EventHandler(terminate);
-    // Set properties of the refresh clock
+    // Set properties of the refresh and ball clock
     ui_refresh_clock.Enabled = false;
     ui_refresh_clock.Interval = refresh_clock_interval;
     ui_refresh_clock.Elapsed += new ElapsedEventHandler(refresh_ui);
-    // Prepare the ball clock properties
+
     ball_clock.Enabled = false;
     ball_clock.Interval = ball_clock_interval;
     ball_clock.Elapsed += new ElapsedEventHandler(update_ball_coords);
-    // set location to start at 1/3 of width
+    // Set location to start at 1/3 of width
     X = display_panel.Width/3;
     Y = display_panel.Height/2;
     X2 = display_panel.Width - display_panel.Width/3;
     Y2 = display_panel.Height/2;
-    // allow ball center to control coords
+    // Allow ball center to control coords
     ball_center_x = X;
     ball_center_y = Y;
     ball_center_x2 = X2;
     ball_center_y2 = Y2;
-    CenterToScreen(); // Center the screen when program is opened
+    CenterToScreen(); // center screen when opened
   } // End of ui constructor
 
   // Function to start animation & perform computations
@@ -232,17 +232,20 @@ public class CatnMouseui : Form {
   protected void update_ball_coords(System.Object sender, ElapsedEventArgs even) {
     // check if the balls have collided with walls
     ball_center_x += Δx;
-    ball_center_x2 += Δx2;
+    ball_center_y += Δy;
+    // collision checks for ball 1
     if (ball_center_x + 25 >= 1015 || ball_center_x - 25 <= 0) {
       Δx = -1 * Δx;
     }
-    if (ball_center_x2 + 15 >= 1015 || ball_center_x2 - 15 <= 0) {
-      Δx2 = -1 * Δx2;
-    }
-    ball_center_y += Δy;
-    ball_center_y2 += Δy2;
     if (ball_center_y + 25 >= display_panel.Height || ball_center_y - 25 <= 0) {
       Δy = -1 * Δy;
+    }
+
+    ball_center_x2 += Δx2;
+    ball_center_y2 += Δy2;
+    // collision checks for ball 2
+    if (ball_center_x2 + 15 >= 1015 || ball_center_x2 - 15 <= 0) {
+      Δx2 = -1 * Δx2;
     }
     if (ball_center_y2 + 15 >= display_panel.Height || ball_center_y2 - 15 <= 0) {
       Δy2 = -1 * Δy2;
@@ -251,7 +254,6 @@ public class CatnMouseui : Form {
     ball_collision = Math.Sqrt(Math.Pow((ball_center_x - ball_center_x2), 2) +
                                Math.Pow((ball_center_y - ball_center_y2), 2));
     if (ball_collision <= 25+15 && in_collision == false) { // collision if distance is smaller than radius
-      normal_color = !normal_color; // change color
       in_collision = true; // first collision has been detected
     }
     else if (ball_collision >= 25+15) { // reset the collision
@@ -259,7 +261,7 @@ public class CatnMouseui : Form {
     }
   } // End of method update_ball_coords
 
-  // tracks the current location of the ball
+  // Tracks the current locations
   protected void refresh_ui(Object sender, EventArgs h) {
     red_coord.Text = "(" + (int)Math.Round(ball_center_x) + ", " + (int)Math.Round(ball_center_y) + ")";
     white_coord.Text = "(" + (int)Math.Round(ball_center_x2) + ", " + (int)Math.Round(ball_center_y2) + ")";
@@ -272,29 +274,17 @@ public class CatnMouseui : Form {
     Close();
   }
 
-  // Graphic class to output a panel
+  // Graphic class to output panels
   public class Graphicpanel : Panel {
     public Graphicpanel() { Console.WriteLine("A graphic panel was created."); }
-    // Calls OnPaint to draw ball
+    // Calls OnPaint to draw objects
     protected override void OnPaint(PaintEventArgs ii) {
       Graphics graph = ii.Graphics;
-      if (normal_color) {
-        // (x, y, width, length)
-        graph.FillEllipse(Brushes.Crimson,
-                          (float)Math.Round(ball_center_x - 25),
-                          (float)Math.Round(ball_center_y - 25), 50, 50);
-        graph.FillEllipse(Brushes.White,
-                          (float)Math.Round(ball_center_x2 - 15),
-                          (float)Math.Round(ball_center_y2 - 15), 30, 30);
-      }
-      else { // switch colors after collision
-        graph.FillEllipse(Brushes.Blue,
-                          (float)Math.Round(ball_center_x - 25),
-                          (float)Math.Round(ball_center_y - 25), 50, 50);
-        graph.FillEllipse(Brushes.Purple,
-                          (float)Math.Round(ball_center_x2 - 15),
-                          (float)Math.Round(ball_center_y2 - 15), 30, 30);
-      }
+      // (x, y, width, length)
+      graph.FillEllipse(Brushes.Crimson, (float)Math.Round(ball_center_x - 25),
+                        (float)Math.Round(ball_center_y - 25), 50, 50);
+      graph.FillEllipse(Brushes.White, (float)Math.Round(ball_center_x2 - 15),
+                        (float)Math.Round(ball_center_y2 - 15), 30, 30);
       base.OnPaint(ii);
     } // OnPaint end
   } // End of graphics constructor
