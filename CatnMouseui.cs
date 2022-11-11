@@ -187,18 +187,20 @@ public class CatnMouseui : Form {
     ball_center_y = Y;
     ball_center_x2 = X2;
     ball_center_y2 = Y2;
+    // Locations are displayed before start
+    red_coord.Text = "(" + (int)Math.Round(X) + ", " + (int)Math.Round(Y) + ")";
+    white_coord.Text = "(" + (int)Math.Round(X2) + ", " + (int)Math.Round(Y2) + ")";
     CenterToScreen(); // center screen when opened
   } // End of ui constructor
 
   // Function to start animation & perform computations
   protected void start(Object sender, EventArgs h) {
+
     try { // check if user inputted coords
       if ((speed_input1 ?? speed_input2) != null) {
-        // convert input to double then display starting coords
+        // convert input to double
         speed1 = double.Parse(speed_input1.Text);
         speed2 = double.Parse(speed_input2.Text);
-        red_coord.Text = "(" + (int)Math.Round(X) + ", " + (int)Math.Round(Y) + ")";
-        white_coord.Text = "(" + (int)Math.Round(X2) + ", " + (int)Math.Round(Y2) + ")";
         // control the speed
         ball_speed_pixel_per_tic1 = speed1 / motion_clock_rate;
         ball_speed_pixel_per_tic2 = speed2 / motion_clock_rate;
