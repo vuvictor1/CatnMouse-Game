@@ -236,7 +236,7 @@ public class CatnMouseui : Form {
     if (ball_center_x + 25 >= 1015 || ball_center_x - 25 <= 0) {
       Δx = -1 * Δx;
     }
-    if (ball_center_x2 + 25 >= 1015 || ball_center_x2 - 25 <= 0) {
+    if (ball_center_x2 + 15 >= 1015 || ball_center_x2 - 15 <= 0) {
       Δx2 = -1 * Δx2;
     }
     ball_center_y += Δy;
@@ -244,17 +244,17 @@ public class CatnMouseui : Form {
     if (ball_center_y + 25 >= display_panel.Height || ball_center_y - 25 <= 0) {
       Δy = -1 * Δy;
     }
-    if (ball_center_y2 + 25 >= display_panel.Height || ball_center_y2 - 25 <= 0) {
+    if (ball_center_y2 + 15 >= display_panel.Height || ball_center_y2 - 15 <= 0) {
       Δy2 = -1 * Δy2;
     }
     // checks if the two balls collided with each other
     ball_collision = Math.Sqrt(Math.Pow((ball_center_x - ball_center_x2), 2) +
                                Math.Pow((ball_center_y - ball_center_y2), 2));
-    if (ball_collision <= 50 && in_collision == false) { // collision if distance is smaller than radius
+    if (ball_collision <= 25+15 && in_collision == false) { // collision if distance is smaller than radius
       normal_color = !normal_color; // change color
       in_collision = true; // first collision has been detected
     }
-    else if (ball_collision >= 50) { // reset the collision
+    else if (ball_collision >= 25+15) { // reset the collision
       in_collision = false;
     }
   } // End of method update_ball_coords
@@ -284,16 +284,16 @@ public class CatnMouseui : Form {
                           (float)Math.Round(ball_center_x - 25),
                           (float)Math.Round(ball_center_y - 25), 50, 50);
         graph.FillEllipse(Brushes.White,
-                          (float)Math.Round(ball_center_x2 - 25),
-                          (float)Math.Round(ball_center_y2 - 25), 50, 50);
+                          (float)Math.Round(ball_center_x2 - 15),
+                          (float)Math.Round(ball_center_y2 - 15), 30, 30);
       }
       else { // switch colors after collision
         graph.FillEllipse(Brushes.Blue,
                           (float)Math.Round(ball_center_x - 25),
                           (float)Math.Round(ball_center_y - 25), 50, 50);
         graph.FillEllipse(Brushes.Purple,
-                          (float)Math.Round(ball_center_x2 - 25),
-                          (float)Math.Round(ball_center_y2 - 25), 50, 50);
+                          (float)Math.Round(ball_center_x2 - 15),
+                          (float)Math.Round(ball_center_y2 - 15), 30, 30);
       }
       base.OnPaint(ii);
     } // OnPaint end
