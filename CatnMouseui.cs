@@ -85,8 +85,8 @@ public class CatnMouseui : Form {
     MaximumSize = max_exit_ui_size;
     MinimumSize = min_exit_ui_size;
     // Initialize string variables
-    Text = "Double Pinball Rebound";
-    author.Text = "Billiard Balls by Victor V. Vu";
+    Text = "The Mouse Chase Game";
+    author.Text = "Cat and Mouse by Victor V. Vu";
     speed_label1.Text = "Enter Red Speed (p/s)";
     speed_label2.Text = "Enter White Speed (p/s)";
     start_button.Text = "Start";
@@ -94,7 +94,7 @@ public class CatnMouseui : Form {
     white_label.Text = "White Ball Location";
     quit_button.Text = "Quit";
     // Set size values (width, length)
-    author.Size = new Size(440, 40);
+    author.Size = new Size(450, 40);
     speed_label1.Size = new Size(200, 30);
     speed_label2.Size = new Size(200, 30);
     speed_input1.Size = new Size(70, 60);
