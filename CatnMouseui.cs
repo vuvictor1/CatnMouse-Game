@@ -34,10 +34,10 @@ public class CatnMouseui : Form {
   private TextBox speed_input1 = new TextBox();
   private TextBox speed_input2 = new TextBox();
   private Button start_button = new Button();
-  private Label red_label = new Label();
+  private Label cat_label = new Label();
   private Label white_label = new Label();
-  private TextBox red_coord = new TextBox();
-  private TextBox white_coord = new TextBox();
+  private TextBox cat_coord = new TextBox();
+  private TextBox mouse_coord = new TextBox();
   private Button quit_button = new Button();
   private Panel header_panel = new Panel();
   private Graphicpanel display_panel = new Graphicpanel();
@@ -90,7 +90,7 @@ public class CatnMouseui : Form {
     speed_label1.Text = "Enter Red Speed (p/s)";
     speed_label2.Text = "Enter White Speed (p/s)";
     start_button.Text = "Start";
-    red_label.Text = "Red Ball Location";
+    cat_label.Text = "Cat Location";
     white_label.Text = "White Ball Location";
     quit_button.Text = "Quit";
     // Set size values (width, length)
@@ -100,10 +100,10 @@ public class CatnMouseui : Form {
     speed_input1.Size = new Size(70, 60);
     speed_input2.Size = new Size(70, 60);
     start_button.Size = new Size(120, 60);
-    red_label.Size = new Size(150, 30);
+    cat_label.Size = new Size(150, 30);
     white_label.Size = new Size(170, 30);
-    red_coord.Size = new Size(100, 60);
-    white_coord.Size = new Size(100, 60);
+    cat_coord.Size = new Size(100, 60);
+    mouse_coord.Size = new Size(100, 60);
     quit_button.Size = new Size(120, 60);
     header_panel.Size = new Size(1024, 50);
     display_panel.Size = new Size(1024, 625);
@@ -123,19 +123,19 @@ public class CatnMouseui : Form {
     speed_input1.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     speed_input2.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     start_button.Font = new Font("Times New Roman", 15, FontStyle.Regular);
-    red_label.Font = new Font("Times New Roman", 15, FontStyle.Regular);
+    cat_label.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     white_label.Font = new Font("Times New Roman", 15, FontStyle.Regular);
-    red_coord.Font = new Font("Times New Roman", 15, FontStyle.Regular);
-    white_coord.Font = new Font("Times New Roman", 15, FontStyle.Regular);
+    cat_coord.Font = new Font("Times New Roman", 15, FontStyle.Regular);
+    mouse_coord.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     quit_button.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     // Set text alignment and read only status
     author.TextAlign = ContentAlignment.MiddleCenter;
     speed_input1.TextAlign = HorizontalAlignment.Center;
     speed_input2.TextAlign = HorizontalAlignment.Center;
-    red_coord.TextAlign = HorizontalAlignment.Center;
-    white_coord.TextAlign = HorizontalAlignment.Center;
-    red_coord.ReadOnly = true;
-    white_coord.ReadOnly = true;
+    cat_coord.TextAlign = HorizontalAlignment.Center;
+    mouse_coord.TextAlign = HorizontalAlignment.Center;
+    cat_coord.ReadOnly = true;
+    mouse_coord.ReadOnly = true;
     // Set locations (width, length)
     author.Location = new Point(300, 5);
     speed_label1.Location = new Point(300, 25);
@@ -143,10 +143,10 @@ public class CatnMouseui : Form {
     speed_input1.Location = new Point(340, 60);
     speed_input2.Location = new Point(550, 60);
     start_button.Location = new Point(110, 75);
-    red_label.Location = new Point(300, 100);
+    cat_label.Location = new Point(315, 100);
     white_label.Location = new Point(500, 100);
-    red_coord.Location = new Point(320, 130);
-    white_coord.Location = new Point(520, 130);
+    cat_coord.Location = new Point(320, 130);
+    mouse_coord.Location = new Point(520, 130);
     quit_button.Location = new Point(790, 75);
     header_panel.Location = new Point(0, 0);
     display_panel.Location = new Point(0, 50);
@@ -161,10 +161,10 @@ public class CatnMouseui : Form {
     control_panel.Controls.Add(speed_input1);
     control_panel.Controls.Add(speed_input2);
     control_panel.Controls.Add(start_button);
-    control_panel.Controls.Add(red_label);
+    control_panel.Controls.Add(cat_label);
     control_panel.Controls.Add(white_label);
-    control_panel.Controls.Add(red_coord);
-    control_panel.Controls.Add(white_coord);
+    control_panel.Controls.Add(cat_coord);
+    control_panel.Controls.Add(mouse_coord);
     control_panel.Controls.Add(quit_button);
     // Control buttons when are clicked
     start_button.Click += new EventHandler(start);
@@ -188,8 +188,8 @@ public class CatnMouseui : Form {
     ball_center_x2 = X2;
     ball_center_y2 = Y2;
     // Locations are displayed before start
-    red_coord.Text = "(" + (int)Math.Round(X) + ", " + (int)Math.Round(Y) + ")";
-    white_coord.Text = "(" + (int)Math.Round(X2) + ", " + (int)Math.Round(Y2) + ")";
+    cat_coord.Text = "(" + (int)Math.Round(X) + ", " + (int)Math.Round(Y) + ")";
+    mouse_coord.Text = "(" + (int)Math.Round(X2) + ", " + (int)Math.Round(Y2) + ")";
     CenterToScreen(); // center screen when opened
   } // End of ui constructor
 
@@ -265,8 +265,8 @@ public class CatnMouseui : Form {
 
   // Tracks the current locations
   protected void refresh_ui(Object sender, EventArgs h) {
-    red_coord.Text = "(" + (int)Math.Round(ball_center_x) + ", " + (int)Math.Round(ball_center_y) + ")";
-    white_coord.Text = "(" + (int)Math.Round(ball_center_x2) + ", " + (int)Math.Round(ball_center_y2) + ")";
+    cat_coord.Text = "(" + (int)Math.Round(ball_center_x) + ", " + (int)Math.Round(ball_center_y) + ")";
+    mouse_coord.Text = "(" + (int)Math.Round(ball_center_x2) + ", " + (int)Math.Round(ball_center_y2) + ")";
     display_panel.Invalidate(); // calls OnPaint
   }
 
