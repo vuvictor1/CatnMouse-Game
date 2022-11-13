@@ -36,6 +36,7 @@ public class CatnMouseui : Form {
   private Button start_button = new Button();
   private Label cat_label = new Label();
   private Label mouse_label = new Label();
+  private Label distance_label = new Label();
   private TextBox cat_coord = new TextBox();
   private TextBox mouse_coord = new TextBox();
   private Button quit_button = new Button();
@@ -92,6 +93,7 @@ public class CatnMouseui : Form {
     start_button.Text = "Start";
     cat_label.Text = "Cat Location";
     mouse_label.Text = "Mouse Location";
+    distance_label.Text = "Distance betwen objects";
     quit_button.Text = "Quit";
     // Set size values (width, length)
     author.Size = new Size(450, 40);
@@ -102,6 +104,7 @@ public class CatnMouseui : Form {
     start_button.Size = new Size(120, 60);
     cat_label.Size = new Size(150, 30);
     mouse_label.Size = new Size(170, 30);
+    distance_label.Size = new Size(225, 30);
     cat_coord.Size = new Size(100, 60);
     mouse_coord.Size = new Size(100, 60);
     quit_button.Size = new Size(120, 60);
@@ -125,6 +128,7 @@ public class CatnMouseui : Form {
     start_button.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     cat_label.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     mouse_label.Font = new Font("Times New Roman", 15, FontStyle.Regular);
+    distance_label.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     cat_coord.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     mouse_coord.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     quit_button.Font = new Font("Times New Roman", 15, FontStyle.Regular);
@@ -138,16 +142,17 @@ public class CatnMouseui : Form {
     mouse_coord.ReadOnly = true;
     // Set locations (width, length)
     author.Location = new Point(300, 5);
-    speed_label1.Location = new Point(300, 25);
-    speed_label2.Location = new Point(510, 25);
-    speed_input1.Location = new Point(340, 60);
-    speed_input2.Location = new Point(550, 60);
-    start_button.Location = new Point(110, 75);
-    cat_label.Location = new Point(315, 100);
-    mouse_label.Location = new Point(505, 100);
-    cat_coord.Location = new Point(320, 130);
-    mouse_coord.Location = new Point(520, 130);
-    quit_button.Location = new Point(790, 75);
+    speed_label1.Location = new Point(200, 25);
+    speed_label2.Location = new Point(410, 25);
+    speed_input1.Location = new Point(240, 60);
+    speed_input2.Location = new Point(450, 60);
+    start_button.Location = new Point(50, 75);
+    cat_label.Location = new Point(215, 100);
+    mouse_label.Location = new Point(405, 100);
+    distance_label.Location = new Point(620, 60);
+    cat_coord.Location = new Point(220, 130);
+    mouse_coord.Location = new Point(420, 130);
+    quit_button.Location = new Point(850, 75);
     header_panel.Location = new Point(0, 0);
     display_panel.Location = new Point(0, 50);
     control_panel.Location = new Point(0, 675);
@@ -163,6 +168,7 @@ public class CatnMouseui : Form {
     control_panel.Controls.Add(start_button);
     control_panel.Controls.Add(cat_label);
     control_panel.Controls.Add(mouse_label);
+    control_panel.Controls.Add(distance_label);
     control_panel.Controls.Add(cat_coord);
     control_panel.Controls.Add(mouse_coord);
     control_panel.Controls.Add(quit_button);
