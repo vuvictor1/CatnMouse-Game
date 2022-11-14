@@ -39,6 +39,7 @@ public class CatnMouseui : Form {
   private Label distance_label = new Label();
   private TextBox cat_coord = new TextBox();
   private TextBox mouse_coord = new TextBox();
+  private TextBox distance = new TextBox();
   private Button quit_button = new Button();
   private Panel header_panel = new Panel();
   private Graphicpanel display_panel = new Graphicpanel();
@@ -107,6 +108,7 @@ public class CatnMouseui : Form {
     distance_label.Size = new Size(225, 30);
     cat_coord.Size = new Size(100, 60);
     mouse_coord.Size = new Size(100, 60);
+    distance.Size = new Size(100, 60);
     quit_button.Size = new Size(120, 60);
     header_panel.Size = new Size(1024, 50);
     display_panel.Size = new Size(1024, 625);
@@ -131,6 +133,7 @@ public class CatnMouseui : Form {
     distance_label.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     cat_coord.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     mouse_coord.Font = new Font("Times New Roman", 15, FontStyle.Regular);
+    distance.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     quit_button.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     // Set text alignment and read only status
     author.TextAlign = ContentAlignment.MiddleCenter;
@@ -138,8 +141,10 @@ public class CatnMouseui : Form {
     speed_input2.TextAlign = HorizontalAlignment.Center;
     cat_coord.TextAlign = HorizontalAlignment.Center;
     mouse_coord.TextAlign = HorizontalAlignment.Center;
+    distance.TextAlign = HorizontalAlignment.Center;
     cat_coord.ReadOnly = true;
     mouse_coord.ReadOnly = true;
+    distance.ReadOnly = true;
     // Set locations (width, length)
     author.Location = new Point(300, 5);
     speed_label1.Location = new Point(200, 25);
@@ -152,6 +157,7 @@ public class CatnMouseui : Form {
     distance_label.Location = new Point(620, 60);
     cat_coord.Location = new Point(220, 130);
     mouse_coord.Location = new Point(420, 130);
+    distance.Location = new Point(670, 90);
     quit_button.Location = new Point(850, 75);
     header_panel.Location = new Point(0, 0);
     display_panel.Location = new Point(0, 50);
@@ -171,6 +177,7 @@ public class CatnMouseui : Form {
     control_panel.Controls.Add(distance_label);
     control_panel.Controls.Add(cat_coord);
     control_panel.Controls.Add(mouse_coord);
+    control_panel.Controls.Add(distance);
     control_panel.Controls.Add(quit_button);
     // Control buttons when are clicked
     start_button.Click += new EventHandler(start);
