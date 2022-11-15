@@ -69,9 +69,7 @@ public class CatnMouseui : Form {
   private static double ball_speed_pixel_per_tic1;
   private static double ball_speed_pixel_per_tic2;
   private static double ball_collision; // distance between ball centers
-  // Control start buttona and collision check
-  private static bool button_pressed = false;
-  private static bool in_collision = false;
+  private static bool button_pressed = false; // control start button
   // Declare refresh and ball clock intervals
   private double refresh_clock_interval = 1000.00/refresh_rate;
   private static System.Timers.Timer ui_refresh_clock = new System.Timers.Timer();
@@ -271,11 +269,11 @@ public class CatnMouseui : Form {
     // checks if the two balls collided with each other
     ball_collision = Math.Sqrt(Math.Pow((ball_center_x - ball_center_x2), 2) +
                                Math.Pow((ball_center_y - ball_center_y2), 2));
-    if (ball_collision <= 25+15 && in_collision == false) { // collision if distance is smaller than radius
-      in_collision = true; // first collision has been detected
-    }
-    else if (ball_collision >= 25+15) { // reset the collision
-      in_collision = false;
+    if (ball_collision <= 25+15) { // collision if distance is smaller than radius
+      Console.WriteLine("The Mouse has been caught."); // collision has been detected
+      // Game Over
+      ui_refresh_clock.Enabled = false;
+      ball_clock.Enabled = false;
     }
   } // End of method update_ball_coords
 
