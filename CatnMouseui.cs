@@ -200,9 +200,12 @@ public class CatnMouseui : Form {
     ball_center_y = Y;
     ball_center_x2 = X2;
     ball_center_y2 = Y2;
-    // Locations are displayed before start
+    // Locations & Distance are displayed before start
     cat_coord.Text = "(" + (int)Math.Round(X) + ", " + (int)Math.Round(Y) + ")";
     mouse_coord.Text = "(" + (int)Math.Round(X2) + ", " + (int)Math.Round(Y2) + ")";
+    ball_collision = Math.Sqrt(Math.Pow((ball_center_x - ball_center_x2), 2) +
+                               Math.Pow((ball_center_y - ball_center_y2), 2));
+    distance.Text = "" + ball_collision + "";
     CenterToScreen(); // center screen when opened
   } // End of ui constructor
 
@@ -276,10 +279,11 @@ public class CatnMouseui : Form {
     }
   } // End of method update_ball_coords
 
-  // Tracks the current locations
+  // Tracks the current locations & distance
   protected void refresh_ui(Object sender, EventArgs h) {
     cat_coord.Text = "(" + (int)Math.Round(ball_center_x) + ", " + (int)Math.Round(ball_center_y) + ")";
     mouse_coord.Text = "(" + (int)Math.Round(ball_center_x2) + ", " + (int)Math.Round(ball_center_y2) + ")";
+    distance.Text = "" + (int)Math.Round(ball_collision) + "";
     display_panel.Invalidate(); // calls OnPaint
   }
 
