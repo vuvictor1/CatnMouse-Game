@@ -192,7 +192,7 @@ public class CatnMouseui : Form {
     ball_clock.Elapsed += new ElapsedEventHandler(update_ball_coords);
 
     key_clock.Enabled = false;
-    key_clock.Interval = ball_clock_interval;
+    key_clock.Interval = key_clock_interval;
     key_clock.Elapsed += new ElapsedEventHandler(key_detect);
     // Set location to start at 1/3 of width
     X = display_panel.Width/3;
@@ -210,6 +210,7 @@ public class CatnMouseui : Form {
     ball_collision = Math.Sqrt(Math.Pow((ball_center_x - ball_center_x2), 2) +
                                Math.Pow((ball_center_y - ball_center_y2), 2));
     distance.Text = "" + ball_collision + "";
+
     CenterToScreen(); // center screen when opened
   } // End of ui constructor
 
@@ -285,14 +286,15 @@ public class CatnMouseui : Form {
     }
   } // End of method update_ball_coords
 
+  // Function to detect key presses
   protected void key_detect(Object sender, KeyEventArgs e) {
-    if (e.KeyCode == Keys.Right) {
-      Console.WriteLine("Right Key Detected");
+      if (e.KeyCode == Keys.Right) {
+        Console.WriteLine("Right Key Detected");
+      }
+      if (e.KeyCode == Keys.Left) {
+        Console.WriteLine("Left Key Detected");
+      }
     }
-    if (e.KeyCode == Keys.Left) {
-      Console.WriteLine("Left Key Detected");
-    }
-  }
 
   // Tracks the current locations & distance
   protected void refresh_ui(Object sender, EventArgs h) {
