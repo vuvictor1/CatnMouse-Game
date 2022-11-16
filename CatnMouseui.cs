@@ -75,6 +75,8 @@ public class CatnMouseui : Form {
   private static System.Timers.Timer ui_refresh_clock = new System.Timers.Timer();
   private double ball_clock_interval = 1000.00/motion_clock_rate;
   private static System.Timers.Timer ball_clock = new System.Timers.Timer();
+  private double key_clock_interval = 1000.00/motion_clock_rate;
+  private static System.Timers.Timer key_clock = new System.Timers.Timer();
   // Generate random numbers in degrees
   private Random number_creator1 = new Random();
   private Random number_creator2 = new Random();
@@ -188,6 +190,10 @@ public class CatnMouseui : Form {
     ball_clock.Enabled = false;
     ball_clock.Interval = ball_clock_interval;
     ball_clock.Elapsed += new ElapsedEventHandler(update_ball_coords);
+
+    key_clock.Enabled = false;
+    key_clock.Interval = ball_clock_interval;
+    key_clock.Elapsed += new ElapsedEventHandler(key_detect);
     // Set location to start at 1/3 of width
     X = display_panel.Width/3;
     Y = display_panel.Height/2;
@@ -236,11 +242,13 @@ public class CatnMouseui : Form {
       button_pressed = true;
       ui_refresh_clock.Enabled = true;
       ball_clock.Enabled = true;
+      key_clock.Enabled = true;
     } else { // pause timers
       start_button.Text = "Resume";
       button_pressed = false;
       ui_refresh_clock.Enabled = false;
       ball_clock.Enabled = false;
+      key_clock.Enabled = false;
     }
   } // End of method initialize
 
@@ -276,6 +284,15 @@ public class CatnMouseui : Form {
       ball_clock.Enabled = false;
     }
   } // End of method update_ball_coords
+
+  protected void key_detect(Object sender, KeyEventArgs e) {
+    if (e.KeyCode == Keys.Right) {
+      Console.WriteLine("Right Key Detected");
+    }
+    if (e.KeyCode == Keys.Left) {
+      Console.WriteLine("Left Key Detected");
+    }
+  }
 
   // Tracks the current locations & distance
   protected void refresh_ui(Object sender, EventArgs h) {
