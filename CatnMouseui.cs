@@ -228,6 +228,7 @@ public class CatnMouseui : Form {
         Δy = (ball_speed_pixel_per_tic1)*Math.Sin(((Math.PI / 180) * -direction1));
         Δx2 = (ball_speed_pixel_per_tic2)*Math.Cos(((Math.PI / 180) * -direction2));
         Δy2 = (ball_speed_pixel_per_tic2)*Math.Sin(((Math.PI / 180) * -direction2));
+        display_panel.Focus(); // instruct program to listen for input
       } // end of if statement
     } // end of try
     catch (Exception) { // prevents program from crashing in case of error
@@ -281,20 +282,6 @@ public class CatnMouseui : Form {
     }
   } // End of method update_ball_coords
 
-  // Function to detect key presses
-  protected override void OnKeyDown(KeyEventArgs e) {
-    if (e.KeyCode == Keys.Right) {
-      Console.WriteLine("Right");
-      ball_center_x += 100;
-    }
-    else if (e.KeyCode == Keys.Left) {
-      Console.WriteLine("Left");
-      ball_center_x += -100;
-    }
-    base.OnKeyDown(e);
-    Invalidate();
-  } // End of OnKeyDown
-
   // Tracks the current locations & distance
   protected void refresh_ui(Object sender, EventArgs h) {
     cat_coord.Text = "(" + (int)Math.Round(ball_center_x) + ", " + (int)Math.Round(ball_center_y) + ")";
@@ -322,5 +309,18 @@ public class CatnMouseui : Form {
                         (float)Math.Round(ball_center_y2 - 15), 30, 30);
       base.OnPaint(ii);
     } // OnPaint end
+    // Function to detect key presses
+    protected override void OnKeyDown(KeyEventArgs e) {
+      if (e.KeyCode == Keys.Right) {
+        Console.WriteLine("Right");
+        ball_center_x += 100;
+      }
+      else if (e.KeyCode == Keys.Left) {
+        Console.WriteLine("Left");
+        ball_center_x += -100;
+      }
+      base.OnKeyDown(e);
+      Invalidate();
+    } // End of OnKeyDown
   } // End of graphics constructor
 } // End of main class
