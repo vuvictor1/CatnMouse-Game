@@ -51,8 +51,7 @@ public class CatnMouseui : Form {
   private const double motion_clock_rate = 42.60; // speed in tics/seconds
   private static double speed1; // input speed in pixel/seconds
   private static double speed2;
-  private static double direction1; // used to hold directions
-  private static double direction2;
+  private static double direction; // hold direction for mouse
   // Statics to update ball locations
   private static double X;
   private static double Y;
@@ -190,10 +189,10 @@ public class CatnMouseui : Form {
     ball_clock.Interval = ball_clock_interval;
     ball_clock.Elapsed += new ElapsedEventHandler(update_ball_coords);
     // Set location to start at 1/3 of width
-    X = display_panel.Width/3;
-    Y = display_panel.Height/2;
-    X2 = display_panel.Width - display_panel.Width/3;
-    Y2 = display_panel.Height/2;
+    X = display_panel.Width / 3;
+    Y = display_panel.Height / 2;
+    X2 = display_panel.Width - display_panel.Width / 3;
+    Y2 = display_panel.Height / 2;
     // Allow ball center to control coords
     ball_center_x = X;
     ball_center_y = Y;
@@ -221,13 +220,13 @@ public class CatnMouseui : Form {
         ball_speed_pixel_per_tic1 = speed1 / motion_clock_rate;
         ball_speed_pixel_per_tic2 = speed2 / motion_clock_rate;
         // generate numbers between 0-360 degrees
-        direction1 = number_creator1.NextDouble() * (360-0) + (0);
-        direction2 = number_creator2.NextDouble() * (360-0) + (0);
+        θ = number_creator1.NextDouble()*2.0*Math.PI; // cat direction
+        direction = number_creator2.NextDouble() * (360-0) + (0); // mouse direction
         // convert degrees to radians
-        Δx = (ball_speed_pixel_per_tic1)*Math.Cos(((Math.PI / 180) * -direction1));
-        Δy = (ball_speed_pixel_per_tic1)*Math.Sin(((Math.PI / 180) * -direction1));
-        Δx2 = (ball_speed_pixel_per_tic2)*Math.Cos(((Math.PI / 180) * -direction2));
-        Δy2 = (ball_speed_pixel_per_tic2)*Math.Sin(((Math.PI / 180) * -direction2));
+        Δx = (ball_speed_pixel_per_tic1)*Math.Cos(θ);
+        Δy = (ball_speed_pixel_per_tic1)*-Math.Sin(θ);
+        Δx2 = (ball_speed_pixel_per_tic2)*Math.Cos(((Math.PI / 180) * -direction));
+        Δy2 = (ball_speed_pixel_per_tic2)*Math.Sin(((Math.PI / 180) * -direction));
         display_panel.Focus(); // call OnKeyDown to detect input
       } // end of if statement
     } // end of try
@@ -272,7 +271,7 @@ public class CatnMouseui : Form {
     ball_collision = Math.Sqrt(Math.Pow((ball_center_x - ball_center_x2), 2) +
                                Math.Pow((ball_center_y - ball_center_y2), 2));
 
-    if (ball_collision <= 25+15) { // collision if distance is smaller than radius
+    if (ball_collision <= 25 + 15) { // collision if distance is smaller than radius
       Console.WriteLine("The Mouse has been caught."); // collision has been detected
       // Game Over, stop all timers
       ui_refresh_clock.Enabled = false;
@@ -309,11 +308,15 @@ public class CatnMouseui : Form {
     } // OnPaint end
     // Function to detect key presses
     protected override void OnKeyDown(KeyEventArgs e) {
-      if (e.KeyCode == Keys.Right) {
-        ball_center_x += 100;
+      if (e.KeyCode == Keys.Left) {
+        θ -= turn_angle; // turn 15 deg clockwise
+        Δx = (ball_speed_pixel_per_tic1)*Math.Cos(θ);
+        Δy = (ball_speed_pixel_per_tic1)*-Math.Sin(θ);
       }
-      else if (e.KeyCode == Keys.Left) {
-        ball_center_x += -100;
+      if (e.KeyCode == Keys.Right) {
+        θ += turn_angle; // turn 15 deg counter-clockwise
+        Δx = (ball_speed_pixel_per_tic1)*Math.Cos(θ);
+        Δy = (ball_speed_pixel_per_tic1)*-Math.Sin(θ);
       }
       base.OnKeyDown(e);
     } // End of OnKeyDown
