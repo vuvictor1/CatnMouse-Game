@@ -75,8 +75,6 @@ public class CatnMouseui : Form {
   private static System.Timers.Timer ui_refresh_clock = new System.Timers.Timer();
   private double ball_clock_interval = 1000.00/motion_clock_rate;
   private static System.Timers.Timer ball_clock = new System.Timers.Timer();
-  private double key_clock_interval = 1000.00/motion_clock_rate;
-  private static System.Timers.Timer key_clock = new System.Timers.Timer();
   // Generate random numbers in degrees
   private Random number_creator1 = new Random();
   private Random number_creator2 = new Random();
@@ -239,13 +237,11 @@ public class CatnMouseui : Form {
       button_pressed = true;
       ui_refresh_clock.Enabled = true;
       ball_clock.Enabled = true;
-      key_clock.Enabled = true;
     } else { // pause timers
       start_button.Text = "Resume";
       button_pressed = false;
       ui_refresh_clock.Enabled = false;
       ball_clock.Enabled = false;
-      key_clock.Enabled = false;
     }
   } // End of method initialize
 
