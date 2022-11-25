@@ -69,7 +69,7 @@ public class CatnMouseui : Form {
   private static double ball_speed_pixel_per_tic2;
   private static double ball_collision; // distance between ball centers
   private static double θ = 0.0; // θ (theta) direction of ball in radians
-  private const double turn_angle = Math.PI/12.0; // angle of 15 degrees in radians
+  private const double turn_angle = Math.PI/12.0; // angle of 30 degrees in radians
   private static bool button_pressed = false; // control start button
   // Declare refresh and ball clock intervals
   private double refresh_clock_interval = 1000.00/refresh_rate;
@@ -309,12 +309,12 @@ public class CatnMouseui : Form {
     // Function to detect key presses
     protected override void OnKeyDown(KeyEventArgs e) {
       if (e.KeyCode == Keys.Left) {
-        θ -= turn_angle; // turn 15 deg clockwise
+        θ -= turn_angle; // turn 30 deg clockwise
         Δx = (ball_speed_pixel_per_tic1)*Math.Cos(θ);
         Δy = (ball_speed_pixel_per_tic1)*-Math.Sin(θ);
       }
       if (e.KeyCode == Keys.Right) {
-        θ += turn_angle; // turn 15 deg counter-clockwise
+        θ += turn_angle; // turn 30 deg counter-clockwise
         Δx = (ball_speed_pixel_per_tic1)*Math.Cos(θ);
         Δy = (ball_speed_pixel_per_tic1)*-Math.Sin(θ);
       }
