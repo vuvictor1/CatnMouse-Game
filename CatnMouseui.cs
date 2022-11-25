@@ -261,7 +261,6 @@ public class CatnMouseui : Form {
     if (ball_center_y + 25 >= display_panel.Height || ball_center_y - 25 <= 0) {
       Δy = -1 * Δy;
     }
-
     ball_center_x2 += Δx2;
     ball_center_y2 += Δy2;
     // collision checks for ball 2
@@ -274,9 +273,10 @@ public class CatnMouseui : Form {
     // checks if the two balls collided with each other
     ball_collision = Math.Sqrt(Math.Pow((ball_center_x - ball_center_x2), 2) +
                                Math.Pow((ball_center_y - ball_center_y2), 2));
+
     if (ball_collision <= 25+15) { // collision if distance is smaller than radius
       Console.WriteLine("The Mouse has been caught."); // collision has been detected
-      // Game Over
+      // Game Over, stop all timers
       ui_refresh_clock.Enabled = false;
       ball_clock.Enabled = false;
     }
