@@ -1,3 +1,11 @@
+The cat (red) will continually chase an ai mouse (white) until caught. The user can control the cat with left and right arrow keys.
+
+***Controls***
+```
+Left-arrow: turn 15 degrees clockwise
+Right-arrow: turn 15 degrees counter-clockwise
+```
+
 Program that animates two pinballs ricocheting off the 4 walls. Featured with random direction generator, location tracker and control buttons. Requires user input for speed and turning. Program written in C#. Runs using a bash script file.
 
 ***Run Instructions***
