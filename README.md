@@ -1,4 +1,7 @@
-Game inpsired by Cops and Robbers. The cat (red) will continually chase an ai mouse (white) until caught. The user can control the cat with left and right arrow keys.
+# CatnMouse
+A cat chasing mouse game. 
+
+Inpsired by Cops and Robbers, the cat (red) will continually chase an ai mouse (white) until caught. The user can control the cat with left and right arrow keys.
 
 ***Controls***
 ```
