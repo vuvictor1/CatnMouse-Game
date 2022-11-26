@@ -5,8 +5,8 @@ Inpsired by Cops and Robbers, the cat (red) will continually chase an ai mouse (
 
 ***Controls***
 ```
-Left-arrow: turn 15 degrees clockwise
-Right-arrow: turn 15 degrees counter-clockwise
+Left-arrow: turn 30 degrees clockwise
+Right-arrow: turn 30 degrees counter-clockwise
 ```
 
 Program animates two objects ricocheting off the 4 walls. Featured with random direction generation, collision detection, location tracker, distance check and control buttons. Requires user input for speed and turning. Program written in C#. Runs using a bash script file.
