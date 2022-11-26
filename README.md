@@ -9,7 +9,7 @@ Left-arrow: turn 15 degrees clockwise
 Right-arrow: turn 15 degrees counter-clockwise
 ```
 
-Program animates two objects ricocheting off the 4 walls. Featured with random direction generation, location tracker, distance check and control buttons. Requires user input for speed and turning. Program written in C#. Runs using a bash script file.
+Program animates two objects ricocheting off the 4 walls. Featured with random direction generation, collision detection, location tracker, distance check and control buttons. Requires user input for speed and turning. Program written in C#. Runs using a bash script file.
 
 ***Run Instructions***
 ```
