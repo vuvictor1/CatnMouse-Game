@@ -163,10 +163,10 @@ public class CatnMouseui : Form {
     speed_input2.Location = new Point(450, 60);
     start_button.Location = new Point(50, 75);
     cat_label.Location = new Point(215, 100);
-    mouse_label.Location = new Point(405, 100);
+    mouse_label.Location = new Point(410, 100);
     distance_label.Location = new Point(620, 60);
     cat_coord.Location = new Point(220, 130);
-    mouse_coord.Location = new Point(420, 130);
+    mouse_coord.Location = new Point(430, 130);
     distance.Location = new Point(670, 90);
     quit_button.Location = new Point(850, 75);
     header_panel.Location = new Point(0, 0);
@@ -247,7 +247,7 @@ public class CatnMouseui : Form {
         Δy = (ball_speed_pixel_per_tic1)*-Math.Sin(θ);
         Δx2 = (ball_speed_pixel_per_tic2)*Math.Cos(direction);
         Δy2 = (ball_speed_pixel_per_tic2)*Math.Sin(direction);
-         
+
         display_panel.Focus(); // call OnKeyDown to detect input
       } // end of if statement
     } // end of try
