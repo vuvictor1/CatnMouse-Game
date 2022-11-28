@@ -21,7 +21,7 @@
    To run bash script, type in terminal: "sh r.sh"
 *******************************************************************************/
 
-// Inlcudes the required system files
+// Required system files
 using System;
 using System.Windows.Forms;
 
