@@ -20,7 +20,7 @@
    Programmed in Ubuntu-based Linux Platform.
    To run bash script, type in terminal: "sh r.sh"
 *******************************************************************************/
-
+// Required system files
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -227,25 +227,26 @@ public class CatnMouseui : Form {
   // Start animation & perform computations
   protected void start(Object sender, EventArgs h) {
 
-    try { // check if user inputted coords
+    try { // Check for proper user input
       if ((speed_input1 ?? speed_input2) != null) {
-        // convert input to double
+        // Convert input string into double
         speed1 = double.Parse(speed_input1.Text);
         speed2 = double.Parse(speed_input2.Text);
 
-        // control the speed
+        // Control the speed
         ball_speed_pixel_per_tic1 = speed1 / motion_clock_rate;
         ball_speed_pixel_per_tic2 = speed2 / motion_clock_rate;
 
-        // generate numbers between 0-360 degrees
+        // Generate numbers between 0-360 degrees
         θ = number_creator1.NextDouble()*2.0*Math.PI; // cat direction
         direction = number_creator2.NextDouble()*2.0*Math.PI; // mouse direction
 
-        // convert degrees to radians
+        // Convert degrees to radians
         Δx = (ball_speed_pixel_per_tic1)*Math.Cos(θ);
         Δy = (ball_speed_pixel_per_tic1)*-Math.Sin(θ);
         Δx2 = (ball_speed_pixel_per_tic2)*Math.Cos(direction);
         Δy2 = (ball_speed_pixel_per_tic2)*Math.Sin(direction);
+         
         display_panel.Focus(); // call OnKeyDown to detect input
       } // end of if statement
     } // end of try
@@ -257,7 +258,7 @@ public class CatnMouseui : Form {
       button_pressed = true;
       ui_refresh_clock.Enabled = true;
       ball_clock.Enabled = true;
-    } else { // pause timers
+    } else { // Pause timers
       start_button.Text = "Resume";
       button_pressed = false;
       ui_refresh_clock.Enabled = false;
@@ -267,10 +268,10 @@ public class CatnMouseui : Form {
 
   // Update coords & animate the ball
   protected void update_ball_coords(System.Object sender, ElapsedEventArgs even) {
-    // check if the balls have collided with walls
+    // Check if the balls have collided with walls
     ball_center_x += Δx;
     ball_center_y += Δy;
-    // collision checks for ball 1
+    // Collision checks for ball 1
     if (ball_center_x + 25 >= 1015 || ball_center_x - 25 <= 0) {
       Δx = -1 * Δx;
     }
@@ -279,14 +280,14 @@ public class CatnMouseui : Form {
     }
     ball_center_x2 += Δx2;
     ball_center_y2 += Δy2;
-    // collision checks for ball 2
+    // Collision checks for ball 2
     if (ball_center_x2 + 15 >= 1015 || ball_center_x2 - 15 <= 0) {
       Δx2 = -1 * Δx2;
     }
     if (ball_center_y2 + 15 >= display_panel.Height || ball_center_y2 - 15 <= 0) {
       Δy2 = -1 * Δy2;
     }
-    // checks if the two balls collided with each other
+    // Checks if the two balls have collided with each other
     ball_collision = Math.Sqrt(Math.Pow((ball_center_x - ball_center_x2), 2) +
                                Math.Pow((ball_center_y - ball_center_y2), 2));
 
