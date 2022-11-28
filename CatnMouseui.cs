@@ -46,13 +46,15 @@ public class CatnMouseui : Form {
   private Panel control_panel = new Panel();
   private Size max_exit_ui_size = new Size(1024, 900);
   private Size min_exit_ui_size = new Size(1024, 900);
+
   // Set up constants and static variables
   private const double refresh_rate = 60.00; // speed in Hz
-  private const double motion_clock_rate = 42.60; // speed in tics/seconds
+  private const double motion_clock_rate = 92.60; // speed in tics/seconds
   private static double speed1; // input speed in pixel/seconds
   private static double speed2;
   private static double direction; // hold direction for mouse
-  // Statics to update ball locations
+
+  // Variables to update ball locations
   private static double X;
   private static double Y;
   private static double X2;
@@ -71,11 +73,13 @@ public class CatnMouseui : Form {
   private static double θ = 0.0; // θ (theta) direction of ball in radians
   private const double turn_angle = Math.PI/12.0; // angle of 30 degrees in radians
   private static bool button_pressed = false; // control start button
+
   // Declare refresh and ball clock intervals
   private double refresh_clock_interval = 1000.00/refresh_rate;
   private static System.Timers.Timer ui_refresh_clock = new System.Timers.Timer();
   private double ball_clock_interval = 1000.00/motion_clock_rate;
   private static System.Timers.Timer ball_clock = new System.Timers.Timer();
+
   // Generate random numbers in degrees
   private Random number_creator1 = new Random();
   private Random number_creator2 = new Random();
@@ -85,6 +89,7 @@ public class CatnMouseui : Form {
     // Assign size to the ui
     MaximumSize = max_exit_ui_size;
     MinimumSize = min_exit_ui_size;
+
     // Initialize string variables
     Text = "The Mouse Chase Game";
     author.Text = "Cat and Mouse by Victor V. Vu";
@@ -95,6 +100,7 @@ public class CatnMouseui : Form {
     mouse_label.Text = "Mouse Location";
     distance_label.Text = "Distance betwen objects";
     quit_button.Text = "Quit";
+
     // Set size values (width, length)
     author.Size = new Size(450, 40);
     speed_label1.Size = new Size(200, 30);
@@ -112,6 +118,7 @@ public class CatnMouseui : Form {
     header_panel.Size = new Size(1024, 50);
     display_panel.Size = new Size(1024, 625);
     control_panel.Size = new Size(1024, 200);
+
     // Set color for panel and buttons
     header_panel.BackColor = Color.Cornsilk;
     display_panel.BackColor = Color.BurlyWood;
@@ -120,6 +127,7 @@ public class CatnMouseui : Form {
     quit_button.BackColor = Color.MediumAquamarine;
     speed_input1.BackColor = Color.Khaki;
     speed_input2.BackColor = Color.Khaki;
+
     // Set text fonts and font size
     author.Font = new Font("Times New Roman", 26, FontStyle.Regular);
     speed_label1.Font = new Font("Times New Roman", 15, FontStyle.Regular);
@@ -134,6 +142,7 @@ public class CatnMouseui : Form {
     mouse_coord.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     distance.Font = new Font("Times New Roman", 15, FontStyle.Regular);
     quit_button.Font = new Font("Times New Roman", 15, FontStyle.Regular);
+
     // Set text alignment and read only status
     author.TextAlign = ContentAlignment.MiddleCenter;
     speed_input1.TextAlign = HorizontalAlignment.Center;
@@ -144,6 +153,7 @@ public class CatnMouseui : Form {
     cat_coord.ReadOnly = true;
     mouse_coord.ReadOnly = true;
     distance.ReadOnly = true;
+
     // Set locations (width, length)
     author.Location = new Point(300, 5);
     speed_label1.Location = new Point(200, 25);
@@ -161,6 +171,7 @@ public class CatnMouseui : Form {
     header_panel.Location = new Point(0, 0);
     display_panel.Location = new Point(0, 50);
     control_panel.Location = new Point(0, 675);
+
     // Control elements to display
     Controls.Add(header_panel);
     header_panel.Controls.Add(author);
@@ -178,9 +189,11 @@ public class CatnMouseui : Form {
     control_panel.Controls.Add(mouse_coord);
     control_panel.Controls.Add(distance);
     control_panel.Controls.Add(quit_button);
-    // Control buttons when are clicked
+
+    // Control buttons click events
     start_button.Click += new EventHandler(start);
     quit_button.Click += new EventHandler(terminate);
+
     // Set properties of the refresh and ball clock
     ui_refresh_clock.Enabled = false;
     ui_refresh_clock.Interval = refresh_clock_interval;
@@ -188,16 +201,19 @@ public class CatnMouseui : Form {
     ball_clock.Enabled = false;
     ball_clock.Interval = ball_clock_interval;
     ball_clock.Elapsed += new ElapsedEventHandler(update_ball_coords);
+
     // Set location to start at 1/3 of width
     X = display_panel.Width / 3;
     Y = display_panel.Height / 2;
     X2 = display_panel.Width - display_panel.Width / 3;
     Y2 = display_panel.Height / 2;
+
     // Allow ball center to control coords
     ball_center_x = X;
     ball_center_y = Y;
     ball_center_x2 = X2;
     ball_center_y2 = Y2;
+
     // Locations & Distance are displayed before start
     cat_coord.Text = "(" + (int)Math.Round(X) + ", " + (int)Math.Round(Y) + ")";
     mouse_coord.Text = "(" + (int)Math.Round(X2) + ", " + (int)Math.Round(Y2) + ")";
@@ -208,7 +224,7 @@ public class CatnMouseui : Form {
     CenterToScreen(); // center screen when opened
   } // End of ui constructor
 
-  // Function to start animation & perform computations
+  // Start animation & perform computations
   protected void start(Object sender, EventArgs h) {
 
     try { // check if user inputted coords
@@ -216,12 +232,15 @@ public class CatnMouseui : Form {
         // convert input to double
         speed1 = double.Parse(speed_input1.Text);
         speed2 = double.Parse(speed_input2.Text);
+
         // control the speed
         ball_speed_pixel_per_tic1 = speed1 / motion_clock_rate;
         ball_speed_pixel_per_tic2 = speed2 / motion_clock_rate;
+
         // generate numbers between 0-360 degrees
         θ = number_creator1.NextDouble()*2.0*Math.PI; // cat direction
-        direction = number_creator2.NextDouble() * (360-0) + (0); // mouse direction
+        direction = number_creator2.NextDouble()*2.0*Math.PI; // mouse direction
+
         // convert degrees to radians
         Δx = (ball_speed_pixel_per_tic1)*Math.Cos(θ);
         Δy = (ball_speed_pixel_per_tic1)*-Math.Sin(θ);
@@ -230,10 +249,10 @@ public class CatnMouseui : Form {
         display_panel.Focus(); // call OnKeyDown to detect input
       } // end of if statement
     } // end of try
-    catch (Exception) { // prevents program from crashing in case of error
-      Console.WriteLine("No input detected"); // program does nothing
+    catch (Exception) { // Prevents program crashing in case of error
+      Console.WriteLine("No input detected"); // error output
     } // end of catch
-    if (button_pressed == false) { // begin timers
+    if (button_pressed == false) { // Begin timers after button click
       start_button.Text = "Pause";
       button_pressed = true;
       ui_refresh_clock.Enabled = true;
@@ -246,7 +265,7 @@ public class CatnMouseui : Form {
     }
   } // End of method initialize
 
-  // Function to update coords & animate the ball
+  // Update coords & animate the ball
   protected void update_ball_coords(System.Object sender, ElapsedEventArgs even) {
     // check if the balls have collided with walls
     ball_center_x += Δx;
@@ -287,7 +306,7 @@ public class CatnMouseui : Form {
     display_panel.Invalidate(); // calls OnPaint
   }
 
-  // Function called by quit button to terminate
+  // Called by quit button to terminate
   protected void terminate(Object sender, EventArgs h) {
     Console.WriteLine("This program will now quit.");
     Close();
@@ -306,7 +325,7 @@ public class CatnMouseui : Form {
                         (float)Math.Round(ball_center_y2 - 15), 30, 30);
       base.OnPaint(ii);
     } // OnPaint end
-    // Function to detect key presses
+    // Detect key presses
     protected override void OnKeyDown(KeyEventArgs e) {
       if (e.KeyCode == Keys.Left) {
         θ -= turn_angle; // turn 30 deg clockwise
