@@ -18,7 +18,7 @@ Run Bash File: sh r.sh
 
 ***Requirements:***
 - mono-complete
-- 
+
 ![Capture](https://user-images.githubusercontent.com/78053016/204356514-e50e1c6a-1c63-42af-b1d1-b74c95d3e802.PNG)
 
 
