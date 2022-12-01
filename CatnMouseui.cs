@@ -50,7 +50,7 @@ public class CatnMouseui : Form {
 
   // Set up constants and static variables
   private const double refresh_rate = 60.00; // speed in Hz
-  private const double motion_clock_rate = 92.60; // speed in tics/seconds
+  private const double motion_clock_rate = 42.60; // speed in tics/seconds
   private static double speed1; // input speed in pixel/seconds
   private static double speed2;
   private static double direction; // hold direction for mouse
