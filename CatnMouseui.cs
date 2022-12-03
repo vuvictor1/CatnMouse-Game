@@ -27,7 +27,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Timers;
 
-// Call functions in form library & delcare variables
+// Call functions in form library & declare variables
 public class CatnMouseui : Form {
   private Label author = new Label();
   private Label speed_label1 = new Label();
