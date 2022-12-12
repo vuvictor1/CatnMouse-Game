@@ -244,9 +244,9 @@ public class CatnMouseui : Form {
 
         // Convert degrees to radians
         Δx = (ball_speed_pixel_per_tic1)*Math.Cos(θ);
-        Δy = (ball_speed_pixel_per_tic1)*-Math.Sin(θ);
+        Δy = (-ball_speed_pixel_per_tic1)*Math.Sin(θ);
         Δx2 = (ball_speed_pixel_per_tic2)*Math.Cos(direction);
-        Δy2 = (ball_speed_pixel_per_tic2)*Math.Sin(direction);
+        Δy2 = (-ball_speed_pixel_per_tic2)*Math.Sin(direction);
 
         display_panel.Focus(); // call OnKeyDown to detect input
       } // end of if statement
