@@ -99,7 +99,7 @@ public class CatnMouseui : Form {
     start_button.Text = "Start";
     cat_label.Text = "Cat Location";
     mouse_label.Text = "Mouse Location";
-    distance_label.Text = "Distance betwen objects";
+    distance_label.Text = "Distance between objects";
     quit_button.Text = "Quit";
 
     // Set size values (width, length)
